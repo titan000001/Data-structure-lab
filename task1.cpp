@@ -1,37 +1,37 @@
 #include<iostream>
+#include<algorithm>
 using namespace std;
-int leftShift(int source[] , int arrLength, int shiftSize){
-    if (shiftSize >> arrLength)
-    {
-        cout << "The shifting value is more than the length of source: ";
-        return 1;
-    }
-    for (int i = 0; i < arrLength; i++){
-        source[i] = (i < arrLength - shiftSize) ? source[i + shiftSize] : 0;
-    }   
-}
 
 int main(){
-    int source[]={10,20,30,40,50,60};
-    int arrLength;
-    arrLength = sizeof(source)/sizeof(source[0]);
+    int arr[] = {1,2,3,4,5};
+    int size = sizeof(arr)/sizeof(arr[0]);
+    int shiftSize;
 
-    cout << "The current array is: ";
-    for (int i = 0; i < arrLength; i++)
+    cout << "the current array is: " ;
+    for (int i = 0; i < size ; i++)
     {
-        cout << source[i] << ",";
+        cout << arr[i] << " ";
     }
     
-    int shiftSize = 1;
-    cout << endl << "How many cells you want to shift? : ";
+    cout << endl << "How many indices do you want to right shift?" << endl;
     cin >> shiftSize;
+    
+    // Perform right shift
+    for (int i = size - 1; i >= shiftSize; i--)
+    {
+        arr[i] = arr[i - shiftSize];
+    }
 
-    leftShift(source, arrLength, shiftSize);
+    // Set the first elements to 0
+    for (int i = 0; i < shiftSize; i++)
+    {
+        arr[i] = 0;
+    }
 
     cout << "The shifted array is: " ;
-    for (int i = 0; i < arrLength; i++)
+    for (int i = 0; i < size; i++)
     {
-        cout << source[i] << ",";
+        cout << arr[i] << " ";
     }
     return 0;
 }
